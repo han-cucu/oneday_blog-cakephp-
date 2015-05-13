@@ -15,5 +15,16 @@ class CommentsController extends AppController
         }
     }
 
-   
+   public function delete() {
+        $comment_id = $this->request->pass[0];
+        $comment = $this->Comment->findById($comment_id);
+        if ($this->request->is('post')) {
+            $this->Comment->delete($comment_id);
+            $this->Session->setFlash('コメントを削除しました。');
+            $this->redirect(array('controller'=>'posts','action'=>'detail',$comment['Comment']['post_id']));
+        } else {
+            // 不正なアクセス
+         $this->Session->setFlash('エラー');
+        }
+    }
 }

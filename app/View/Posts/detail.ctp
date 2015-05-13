@@ -12,7 +12,17 @@
 <p>コメント一覧</p>
 <ul>
 <?php foreach ($post['Comment'] as $comment): ?>
-<li><?php echo h($comment['body']) ?> by <?php echo h($comment['commenter']); ?></li>
+<li id ="comment_<?php echo h($comment['id']); ?>">
+<?php echo h($comment['body']) ?> by <?php echo h($comment['commenter']); ?>
+<?php
+echo $this->Form->postLink(
+    '削除',
+    array('controller' =>'comments','action'=>'delete', $comment['id']),
+    array('class'=>'btn btn-normal'),
+    '本当に削除してもよろしいですか？' // 確認メッセージ
+);
+?>
+</li>
 <?php endforeach; ?>
 </ul>
 <?php 
