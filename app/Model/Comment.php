@@ -1,15 +1,12 @@
 <?php
 
-// Postモデル
+
 class Comment extends AppModel
 {
-	public $belongsTo = array(
-		'User',
-		'Post'
-	);
+	public $belongsTo = array('Post');
 
 	public $validate = array(
-		'user_id' =>  'notEmpty',
+		'commenter' => 'notEmpty',
 		'post_id' => 'notEmpty',
 		'body' => 'notEmpty'
 	);

@@ -26,4 +26,15 @@ class CategoriesController extends AppController
         
     }
 
+    public function add() {
+        if($this->request->is('post')) {
+            if($this->Category->save($this->request->data)) {
+                 $this->Session->setFlash('カテゴリを追加しました。');
+                 $this->redirect(array('controller'=>'categories','action'=>'index'));   
+            } else {
+                $this->Session->setFlash('エラー');
+            }
+        }
+    }
+
 }

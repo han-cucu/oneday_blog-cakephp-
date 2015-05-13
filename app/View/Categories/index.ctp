@@ -8,5 +8,8 @@
 <?php endforeach; ?>
 </table>
 <?php 
-echo $this->Html->link('カテゴリを追加する',array('action'=>'add'),array('class'=>'btn btn-primary')); 
+echo $this->Form->create('Category', array('action'=>'add'));
+echo $this->Form->input('name', array('rows'=>1));
+echo $this->Form->submit('カテゴリを追加する',array('class'=>'btn btn-primary')
+);
 ?>

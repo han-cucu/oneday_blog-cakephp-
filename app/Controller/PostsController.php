@@ -2,7 +2,8 @@
 
 class PostsController extends AppController
 {
-    public $uses = array('Post', 'User', 'Category');
+
+    public $uses = array('Post', 'User', 'Category','Comment');
 
      //記事一覧ページ
      public function index()
@@ -10,12 +11,14 @@ class PostsController extends AppController
          //投稿記事を全て取り出す
          $posts = $this->Post->find('all');
          $this->set('posts',$posts);
+         $this->set('title_for_layout','記事一覧');
      }
      //記事詳細ページ
     public function detail() {
         $post_id = $this->request->pass[0];
         $post = $this->Post->findById($post_id);
         $this->set('post',$post);
+        $this->set('title_for_layout',$post['Post']['title']);
 
     }
      //記事追加ページ
@@ -25,6 +28,7 @@ class PostsController extends AppController
          $categories = $this->Category->find('list');
          $this->set('users',$users);
          $this->set('categories',$categories);
+         $this->set('title_for_layout','記事追加');
 
         if ($this->request->is('post')) {
             $post = $this->request->data;
@@ -57,6 +61,7 @@ class PostsController extends AppController
         $categories = $this->Category->find('list');
         $this->set('users',$users);
         $this->set('categories',$categories);
+        $this->set('title_for_layout','記事編集');
 
         $post_id = $this->request->pass[0];
         $post = $this->Post->findById($post_id);

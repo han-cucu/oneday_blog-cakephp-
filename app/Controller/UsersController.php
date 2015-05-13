@@ -7,7 +7,6 @@ class UsersController extends AppController
     public $uses = array('Post', 'User', 'Category');  
   
     public function index(){
-    	 //カテゴリを全て取り出す
          $users = $this->User->find('all');
          $this->set('users',$users);
 
@@ -22,8 +21,17 @@ class UsersController extends AppController
             array('conditions' => array('Post.user_id' => $user_id))
         );
         $this->set('posts',$posts);
+    }
 
-        
+    public function add() {
+        if($this->request->is('post')) {
+            if($this->User->save($this->request->data)) {
+                 $this->Session->setFlash('ユーザーを追加しました。');
+                 $this->redirect(array('controller'=>'users','action'=>'index'));   
+            } else {
+                $this->Session->setFlash('エラー');
+            }
+        }
     }
 
 }

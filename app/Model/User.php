@@ -1,6 +1,5 @@
 <?php
 
-
 class User extends AppModel
 {
 
@@ -9,8 +8,6 @@ class User extends AppModel
 		'name' => 'notEmpty'
 	);
 	
-	public $hasMany = array('Post',
-		'Comment');
-
+	public $hasMany = array('Post');
 	public $recursive = 2;
 }
